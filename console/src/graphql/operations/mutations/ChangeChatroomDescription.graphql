@@ -1,0 +1,8 @@
+mutation ChangeChatroomDescription($id: ID!, $description: String!) {
+  changeChatroomDescription(input: { id: $id, description: $description }) {
+    chatroom {
+      id
+      description
+    }
+  }
+}
