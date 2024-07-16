@@ -163,6 +163,7 @@ function ChangeDescription({
           }}
           rows={4}
           multiline
+          disabled={status.loading}
         />
         <Box display="flex" justifyContent="space-between" marginTop={4}>
           <Typography
