@@ -1,4 +1,10 @@
-import { Edit, KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import {
+  CheckBox,
+  CheckBoxOutlineBlank,
+  Edit,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+} from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -29,13 +35,16 @@ const ChatroomCard = styled(Card)<CardProps>(({ theme }) => ({
 
 export type ChatroomListItemProps = {
   chatroom: ChatroomDataFragment;
+  onResolve(): void;
 };
 
 export const ChatroomListItem: React.FC<ChatroomListItemProps> = ({
   chatroom,
+  onResolve,
 }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [changeDescription, setChangeDescription] = useState(false);
+  const [hoverResolve, setHoverResolve] = useState(false);
 
   const natureCodeName = chatroom.natureCode?.name ?? "Uncategorized";
 
@@ -72,17 +81,37 @@ export const ChatroomListItem: React.FC<ChatroomListItemProps> = ({
               <Typography variant="body2" sx={{ mt: 2 }}>
                 {chatroom.description ?? "No description provided."}
               </Typography>
-              <Button
-                size="small"
-                variant="outlined"
-                startIcon={<Edit />}
-                onClick={() => {
-                  setChangeDescription(true);
-                }}
-                sx={{ mt: 2 }}
-              >
-                Edit
-              </Button>
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  startIcon={<Edit />}
+                  onClick={() => {
+                    setChangeDescription(true);
+                  }}
+                  sx={{ mr: 1 }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  startIcon={
+                    hoverResolve ? <CheckBox /> : <CheckBoxOutlineBlank />
+                  }
+                  onMouseEnter={() => {
+                    setHoverResolve(true);
+                  }}
+                  onMouseLeave={() => {
+                    setHoverResolve(false);
+                  }}
+                  onClick={() => {
+                    onResolve();
+                  }}
+                >
+                  Resolve
+                </Button>
+              </Box>
             </>
           )}
         </Card>

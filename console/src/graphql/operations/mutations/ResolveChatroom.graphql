@@ -1,0 +1,7 @@
+mutation ResolveChatroom($id: ID!) {
+  resolveChatroom(input: { id: $id }) {
+    chatroom {
+      id
+    }
+  }
+}
