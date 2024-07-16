@@ -81,37 +81,39 @@ export const ChatroomListItem: React.FC<ChatroomListItemProps> = ({
               <Typography variant="body2" sx={{ mt: 2 }}>
                 {chatroom.description ?? "No description provided."}
               </Typography>
-              <Box sx={{ mt: 2 }}>
-                <Button
-                  size="small"
-                  variant="outlined"
-                  startIcon={<Edit />}
-                  onClick={() => {
-                    setChangeDescription(true);
-                  }}
-                  sx={{ mr: 1 }}
-                >
-                  Edit
-                </Button>
-                <Button
-                  size="small"
-                  variant="outlined"
-                  startIcon={
-                    hoverResolve ? <CheckBox /> : <CheckBoxOutlineBlank />
-                  }
-                  onMouseEnter={() => {
-                    setHoverResolve(true);
-                  }}
-                  onMouseLeave={() => {
-                    setHoverResolve(false);
-                  }}
-                  onClick={() => {
-                    onResolve();
-                  }}
-                >
-                  Resolve
-                </Button>
-              </Box>
+              {chatroom.resolved ? undefined : (
+                <Box sx={{ mt: 2 }}>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    startIcon={<Edit />}
+                    onClick={() => {
+                      setChangeDescription(true);
+                    }}
+                    sx={{ mr: 1 }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    startIcon={
+                      hoverResolve ? <CheckBox /> : <CheckBoxOutlineBlank />
+                    }
+                    onMouseEnter={() => {
+                      setHoverResolve(true);
+                    }}
+                    onMouseLeave={() => {
+                      setHoverResolve(false);
+                    }}
+                    onClick={() => {
+                      onResolve();
+                    }}
+                  >
+                    Resolve
+                  </Button>
+                </Box>
+              )}
             </>
           )}
         </Card>
